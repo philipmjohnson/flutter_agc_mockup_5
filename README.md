@@ -9,7 +9,7 @@ The main changes in this version include:
 * Use of Firebase Firestore as the backend storage.
 * Use of Firebase authentication for user registration and signin.
 * Use of [MultiAsyncValuesWidget] for retrieving multiple collections.
-* Use of [GlobalSnackbar] for notification.
+* Use of [GlobalSnackBar] for notification.
 
 
 ## Screen shots

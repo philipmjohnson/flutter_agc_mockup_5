@@ -71,6 +71,9 @@ import 'user/domain/user.dart';
 /// and the current context. These are passed through to the _build method, as
 /// they are frequently (but not always) needed.
 ///
+/// This widget is invoked around a dozen times in this application.
+/// Any widget manipulating Gardens, Chapters, News, or Users uses it.
+///
 /// There are several things I don't like about this design. For example, the
 /// _build method has to be a function with a parameter signature that specifies
 /// all possible AsyncValue return values, regardless of whether it will actually
