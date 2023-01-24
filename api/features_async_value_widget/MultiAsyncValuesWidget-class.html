@@ -108,8 +108,8 @@ documents from the News collection are needed for this widget.</p>
 <p>Note that MultiAsyncValuesWidget requires that you pass in the currentUserID
 and the current context. These are passed through to the _build method, as
 they are frequently (but not always) needed.</p>
-<p>This widget is currently invoked around a dozen times in this application.
-Any widget manipulating Gardens, Chapters, News, or Users must use it.</p>
+<p>This widget is invoked around a dozen times in this application.
+Any widget manipulating Gardens, Chapters, News, or Users uses it.</p>
 <p>There are several things I don't like about this design. For example, the
 _build method has to be a function with a parameter signature that specifies
 all possible AsyncValue return values, regardless of whether it will actually
