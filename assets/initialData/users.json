@@ -1,0 +1,34 @@
+[
+  {
+    "id": "jennacorindeane@gmail.com",
+    "name": "Jenna Deane",
+    "username": "@fluke",
+    "imagePath": "assets/images/user-001.jpg",
+    "initials": "JD"
+  },
+  {
+    "id": "jessebeck@gmail.com",
+    "name": "Jesse Beck",
+    "username": "@jesse",
+    "initials": "JB"
+  },
+  {
+    "id": "joanne.amberg@gmail.com",
+    "name": "Joanne Amberg",
+    "username": "@joanne",
+    "initials": "JA"
+  },
+  {
+    "id": "johnson@hawaii.edu",
+    "name": "Philip Johnson",
+    "username": "@fiveoclockphil",
+    "initials": "PJ"
+  },
+  {
+    "id": "katieambergjohnson@gmail.com",
+    "name": "Katie Amberg-Johnson",
+    "username": "@katiekai",
+    "imagePath": "assets/images/user-005.jpg",
+    "initials": "KAJ"
+  }
+]
