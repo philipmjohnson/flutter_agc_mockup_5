@@ -6,7 +6,7 @@ part of 'garden.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Garden _$$_GardenFromJson(Map<String, dynamic> json) => _$_Garden(
+_$GardenImpl _$$GardenImplFromJson(Map<String, dynamic> json) => _$GardenImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       description: json['description'] as String,
@@ -24,7 +24,8 @@ _$_Garden _$$_GardenFromJson(Map<String, dynamic> json) => _$_Garden(
           const [],
     );
 
-Map<String, dynamic> _$$_GardenToJson(_$_Garden instance) => <String, dynamic>{
+Map<String, dynamic> _$$GardenImplToJson(_$GardenImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,

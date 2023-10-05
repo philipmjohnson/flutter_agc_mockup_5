@@ -110,9 +110,10 @@ class _$NewsCopyWithImpl<$Res, $Val extends News>
 }
 
 /// @nodoc
-abstract class _$$_NewsCopyWith<$Res> implements $NewsCopyWith<$Res> {
-  factory _$$_NewsCopyWith(_$_News value, $Res Function(_$_News) then) =
-      __$$_NewsCopyWithImpl<$Res>;
+abstract class _$$NewsImplCopyWith<$Res> implements $NewsCopyWith<$Res> {
+  factory _$$NewsImplCopyWith(
+          _$NewsImpl value, $Res Function(_$NewsImpl) then) =
+      __$$NewsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -127,9 +128,10 @@ abstract class _$$_NewsCopyWith<$Res> implements $NewsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_NewsCopyWithImpl<$Res> extends _$NewsCopyWithImpl<$Res, _$_News>
-    implements _$$_NewsCopyWith<$Res> {
-  __$$_NewsCopyWithImpl(_$_News _value, $Res Function(_$_News) _then)
+class __$$NewsImplCopyWithImpl<$Res>
+    extends _$NewsCopyWithImpl<$Res, _$NewsImpl>
+    implements _$$NewsImplCopyWith<$Res> {
+  __$$NewsImplCopyWithImpl(_$NewsImpl _value, $Res Function(_$NewsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -144,7 +146,7 @@ class __$$_NewsCopyWithImpl<$Res> extends _$NewsCopyWithImpl<$Res, _$_News>
     Object? body = null,
     Object? date = null,
   }) {
-    return _then(_$_News(
+    return _then(_$NewsImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -183,8 +185,8 @@ class __$$_NewsCopyWithImpl<$Res> extends _$NewsCopyWithImpl<$Res, _$_News>
 
 /// @nodoc
 @JsonSerializable()
-class _$_News implements _News {
-  const _$_News(
+class _$NewsImpl implements _News {
+  const _$NewsImpl(
       {required this.id,
       required this.userID,
       this.chapterID,
@@ -194,7 +196,8 @@ class _$_News implements _News {
       required this.body,
       required this.date});
 
-  factory _$_News.fromJson(Map<String, dynamic> json) => _$$_NewsFromJson(json);
+  factory _$NewsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewsImplFromJson(json);
 
   @override
   final String id;
@@ -222,7 +225,7 @@ class _$_News implements _News {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_News &&
+            other is _$NewsImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userID, userID) || other.userID == userID) &&
             (identical(other.chapterID, chapterID) ||
@@ -244,12 +247,12 @@ class _$_News implements _News {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NewsCopyWith<_$_News> get copyWith =>
-      __$$_NewsCopyWithImpl<_$_News>(this, _$identity);
+  _$$NewsImplCopyWith<_$NewsImpl> get copyWith =>
+      __$$NewsImplCopyWithImpl<_$NewsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NewsToJson(
+    return _$$NewsImplToJson(
       this,
     );
   }
@@ -264,9 +267,9 @@ abstract class _News implements News {
       required final String iconName,
       required final String title,
       required final String body,
-      required final String date}) = _$_News;
+      required final String date}) = _$NewsImpl;
 
-  factory _News.fromJson(Map<String, dynamic> json) = _$_News.fromJson;
+  factory _News.fromJson(Map<String, dynamic> json) = _$NewsImpl.fromJson;
 
   @override
   String get id;
@@ -286,5 +289,6 @@ abstract class _News implements News {
   String get date;
   @override
   @JsonKey(ignore: true)
-  _$$_NewsCopyWith<_$_News> get copyWith => throw _privateConstructorUsedError;
+  _$$NewsImplCopyWith<_$NewsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

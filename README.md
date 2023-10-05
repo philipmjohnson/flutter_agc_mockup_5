@@ -1,6 +1,5 @@
 # Flutter mockup of the Agile Garden Club app (Phase 5)
 
-[![CodeFactor](https://www.codefactor.io/repository/github/philipmjohnson/flutter_agc_mockup_5/badge)](https://www.codefactor.io/repository/github/philipmjohnson/flutter_agc_mockup_5)
 
 This repository contains a mockup of the [Agile Garden Club](https://agilegardenclub.com) application.
 

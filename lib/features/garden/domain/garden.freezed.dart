@@ -117,9 +117,10 @@ class _$GardenCopyWithImpl<$Res, $Val extends Garden>
 }
 
 /// @nodoc
-abstract class _$$_GardenCopyWith<$Res> implements $GardenCopyWith<$Res> {
-  factory _$$_GardenCopyWith(_$_Garden value, $Res Function(_$_Garden) then) =
-      __$$_GardenCopyWithImpl<$Res>;
+abstract class _$$GardenImplCopyWith<$Res> implements $GardenCopyWith<$Res> {
+  factory _$$GardenImplCopyWith(
+          _$GardenImpl value, $Res Function(_$GardenImpl) then) =
+      __$$GardenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -135,10 +136,11 @@ abstract class _$$_GardenCopyWith<$Res> implements $GardenCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_GardenCopyWithImpl<$Res>
-    extends _$GardenCopyWithImpl<$Res, _$_Garden>
-    implements _$$_GardenCopyWith<$Res> {
-  __$$_GardenCopyWithImpl(_$_Garden _value, $Res Function(_$_Garden) _then)
+class __$$GardenImplCopyWithImpl<$Res>
+    extends _$GardenCopyWithImpl<$Res, _$GardenImpl>
+    implements _$$GardenImplCopyWith<$Res> {
+  __$$GardenImplCopyWithImpl(
+      _$GardenImpl _value, $Res Function(_$GardenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +156,7 @@ class __$$_GardenCopyWithImpl<$Res>
     Object? editorIDs = null,
     Object? viewerIDs = null,
   }) {
-    return _then(_$_Garden(
+    return _then(_$GardenImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -197,8 +199,8 @@ class __$$_GardenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Garden implements _Garden {
-  const _$_Garden(
+class _$GardenImpl implements _Garden {
+  const _$GardenImpl(
       {required this.id,
       required this.name,
       required this.description,
@@ -211,8 +213,8 @@ class _$_Garden implements _Garden {
       : _editorIDs = editorIDs,
         _viewerIDs = viewerIDs;
 
-  factory _$_Garden.fromJson(Map<String, dynamic> json) =>
-      _$$_GardenFromJson(json);
+  factory _$GardenImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GardenImplFromJson(json);
 
   @override
   final String id;
@@ -255,7 +257,7 @@ class _$_Garden implements _Garden {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Garden &&
+            other is _$GardenImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -290,12 +292,12 @@ class _$_Garden implements _Garden {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GardenCopyWith<_$_Garden> get copyWith =>
-      __$$_GardenCopyWithImpl<_$_Garden>(this, _$identity);
+  _$$GardenImplCopyWith<_$GardenImpl> get copyWith =>
+      __$$GardenImplCopyWithImpl<_$GardenImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GardenToJson(
+    return _$$GardenImplToJson(
       this,
     );
   }
@@ -311,9 +313,9 @@ abstract class _Garden implements Garden {
       required final String chapterID,
       required final String lastUpdate,
       final List<String> editorIDs,
-      final List<String> viewerIDs}) = _$_Garden;
+      final List<String> viewerIDs}) = _$GardenImpl;
 
-  factory _Garden.fromJson(Map<String, dynamic> json) = _$_Garden.fromJson;
+  factory _Garden.fromJson(Map<String, dynamic> json) = _$GardenImpl.fromJson;
 
   @override
   String get id;
@@ -335,6 +337,6 @@ abstract class _Garden implements Garden {
   List<String> get viewerIDs;
   @override
   @JsonKey(ignore: true)
-  _$$_GardenCopyWith<_$_Garden> get copyWith =>
+  _$$GardenImplCopyWith<_$GardenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
