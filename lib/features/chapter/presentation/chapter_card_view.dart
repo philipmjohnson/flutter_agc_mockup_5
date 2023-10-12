@@ -57,7 +57,7 @@ class ChapterCardView extends ConsumerWidget {
               ListTile(
                   trailing: const Icon(Icons.more_vert),
                   title: Text('${data.name} Chapter',
-                      style: Theme.of(context).textTheme.headline6)),
+                      style: Theme.of(context).textTheme.titleLarge)),
               const SizedBox(height: 10),
               SizedBox(
                 height: 150.0,

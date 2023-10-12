@@ -92,10 +92,10 @@ class GardensView extends ConsumerWidget {
                   .getAssociatedGardens(userID: currentUserID)
                   .map((garden) => GardenSummaryView(garden: garden))
                   .toList())),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
+      bottomNavigationBar: const BottomAppBar(
+        shape: CircularNotchedRectangle(),
         child: Row(
-          children: const <Widget>[],
+          children: <Widget>[],
         ),
       ),
     );
