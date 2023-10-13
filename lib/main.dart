@@ -15,6 +15,7 @@ import 'features/discussion/presentation/discussions_view.dart';
 import 'features/garden/domain/garden.dart';
 import 'features/garden/presentation/add_garden_view.dart';
 import 'features/garden/presentation/edit_garden_view.dart';
+import 'features/garden/presentation/edit_garden_view2.dart';
 import 'features/garden/presentation/gardens_view.dart';
 import 'features/garden/presentation/gardens_view2.dart';
 import 'features/global_snackbar.dart';
@@ -85,7 +86,7 @@ class MyApp extends ConsumerWidget {
               case AddGardenView.routeName:
                 return AddGardenView2();
               case EditGardenView.routeName:
-                return const EditGardenView();
+                return EditGardenView2();
               case ChaptersView.routeName:
                 return const ChaptersView2();
               case OutcomesView.routeName:
