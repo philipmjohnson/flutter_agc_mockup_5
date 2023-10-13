@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart' hide ForgotPasswordView;
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_agc_mockup/features/garden/presentation/add_garden_view2.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'features/authentication/presentation/forgot_password_view.dart';
@@ -82,7 +83,7 @@ class MyApp extends ConsumerWidget {
               case GardensView.routeName:
                 return const GardensView2();
               case AddGardenView.routeName:
-                return const AddGardenView();
+                return AddGardenView2();
               case EditGardenView.routeName:
                 return const EditGardenView();
               case ChaptersView.routeName:
