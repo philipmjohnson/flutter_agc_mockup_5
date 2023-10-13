@@ -2,13 +2,13 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart' hide UserAvatar;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'async_value_widget.dart';
 import 'authentication/presentation/signin_view.dart';
 import 'chapter/presentation/chapters_view.dart';
 import 'discussion/presentation/discussions_view.dart';
 import 'garden/presentation/gardens_view.dart';
 import 'help/presentation/help_view.dart';
 import 'home_view.dart';
+import 'multi_async_values_widget.dart';
 import 'outcome/presentation/outcomes_view.dart';
 import 'seed/presentation/seeds_view.dart';
 import 'settings/presentation/settings_view.dart';

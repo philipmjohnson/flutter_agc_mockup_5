@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'async_value_widget.dart';
 import 'chapter/domain/chapter.dart';
 import 'discussion/presentation/discussions_body_view.dart';
 import 'drawer_view.dart';
@@ -10,6 +9,7 @@ import 'garden/domain/garden.dart';
 import 'garden/domain/garden_collection.dart';
 import 'garden/presentation/gardens_body_view.dart';
 import 'help/presentation/help_button.dart';
+import 'multi_async_values_widget.dart';
 import 'news/data/news_provider.dart';
 import 'news/domain/news.dart';
 import 'news/domain/news_collection.dart';

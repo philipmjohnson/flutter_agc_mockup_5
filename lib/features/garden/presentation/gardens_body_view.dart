@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_agc_mockup/features/async_value_widget.dart';
+import 'package:flutter_agc_mockup/features/multi_async_values_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../chapter/domain/chapter.dart';
