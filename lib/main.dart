@@ -9,6 +9,7 @@ import 'features/authentication/presentation/signin_view.dart';
 import 'features/authentication/presentation/verify_email_view.dart';
 import 'features/chapter/domain/chapter.dart';
 import 'features/chapter/presentation/chapters_view.dart';
+import 'features/chapter/presentation/chapters_view2.dart';
 import 'features/discussion/presentation/discussions_view.dart';
 import 'features/garden/domain/garden.dart';
 import 'features/garden/presentation/add_garden_view.dart';
@@ -84,7 +85,7 @@ class MyApp extends ConsumerWidget {
               case EditGardenView.routeName:
                 return const EditGardenView();
               case ChaptersView.routeName:
-                return const ChaptersView();
+                return const ChaptersView2();
               case OutcomesView.routeName:
                 return const OutcomesView();
               case SeedsView.routeName:
