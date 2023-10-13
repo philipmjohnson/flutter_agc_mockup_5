@@ -16,11 +16,13 @@ class SettingsView extends ConsumerWidget {
     // Do not perform any work if new and old ThemeMode are identical
     if (newThemeMode == ref.read(currentThemeModeProvider)) return;
     // Otherwise, store the new ThemeMode in memory
-    ref.read(currentThemeModeProvider.notifier).state = newThemeMode;
+    ref.read(currentThemeModeProvider.notifier).setThemeMode(newThemeMode);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Update the page if theme mode changes.
+    ref.watch(currentThemeModeProvider);
     return Scaffold(
       drawer: const DrawerView(),
       appBar: AppBar(

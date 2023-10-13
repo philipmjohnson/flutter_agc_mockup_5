@@ -1,13 +1,27 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/news.dart';
 import 'news_database.dart';
 
-final newsDatabaseProvider = Provider<NewsDatabase>((ref) {
-  return NewsDatabase(ref);
-});
+part 'news_provider.g.dart';
 
-final newsProvider = StreamProvider<List<News>>((ref) {
+@riverpod
+NewsDatabase newsDatabase(NewsDatabaseRef ref) {
+  return NewsDatabase(ref);
+}
+
+@riverpod
+Stream<List<News>> news(NewsRef ref) {
   final database = ref.watch(newsDatabaseProvider);
   return database.watchNewss();
-});
+}
+
+// Old way:
+// final newsDatabaseProvider = Provider<NewsDatabase>((ref) {
+//   return NewsDatabase(ref);
+// });
+//
+// final newsProvider = StreamProvider<List<News>>((ref) {
+//   final database = ref.watch(newsDatabaseProvider);
+//   return database.watchNewss();
+// });

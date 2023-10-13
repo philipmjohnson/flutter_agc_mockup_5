@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final currentThemeModeProvider = StateProvider<ThemeMode>((ref) {
-  return ThemeMode.system;
-});
+part 'settings_db.g.dart';
+
+@riverpod
+class CurrentThemeMode extends _$CurrentThemeMode {
+  @override
+  ThemeMode build() {
+    return ThemeMode.system;
+  }
+
+  void setThemeMode(ThemeMode themeMode) {
+    state = themeMode;
+  }
+}
+
+// final currentThemeModeProvider = StateProvider<ThemeMode>((ref) {
+//   return ThemeMode.system;
+// });
