@@ -12,7 +12,6 @@ import '../domain/garden_collection.dart';
 import 'edit_garden_controller.dart';
 import 'edit_garden_view.dart';
 import 'garden_summary_users_view.dart';
-import 'gardens_view.dart';
 
 enum GardenAction { edit, delete }
 
@@ -34,6 +33,42 @@ class GardenSummaryView extends ConsumerWidget {
             gardens: allData.gardens),
         loading: () => const AGCLoading(),
         error: (error, st) => AGCError(error.toString(), st.toString()));
+  }
+
+  // Handle the "Delete" dropdown selection.
+  Future<void> _onDelete(BuildContext context, WidgetRef ref) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Are you sure?'),
+        content: const Text('This garden will be permanently deleted.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
+
+    if (result == null || !result) {
+      return;
+    }
+    ref.read(editGardenControllerProvider.notifier).deleteGarden(
+        garden: garden,
+        onSuccess: () {
+          GlobalSnackBar.show('Garden delete succeeded.');
+        });
+  }
+
+  // Handle the "Edit" dropdown selection.
+  Future<void> _onEdit(BuildContext context) async {
+    Navigator.restorablePushNamed(context, EditGardenView.routeName,
+        arguments: garden.id);
   }
 
   Widget _build(
@@ -65,17 +100,9 @@ class GardenSummaryView extends ConsumerWidget {
               // Callback that sets the selected popup menu item.
               onSelected: (GardenAction action) {
                 if (action == GardenAction.edit) {
-                  Navigator.restorablePushNamed(
-                      context, EditGardenView.routeName,
-                      arguments: garden.id);
+                  _onEdit(context);
                 } else if (action == GardenAction.delete) {
-                  ref.read(editGardenControllerProvider.notifier).deleteGarden(
-                      garden: garden,
-                      onSuccess: () {
-                        Navigator.pushReplacementNamed(
-                            context, GardensView.routeName);
-                        GlobalSnackBar.show('Garden delete succeeded.');
-                      });
+                  _onDelete(context, ref);
                 }
               },
               itemBuilder: (BuildContext context) =>
