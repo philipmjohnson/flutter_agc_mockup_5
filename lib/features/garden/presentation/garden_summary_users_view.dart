@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../agc_error.dart';
 import '../../../agc_loading.dart';
-import '../../multi_async_values_provider.dart';
+import '../../all_data_provider.dart';
 import '../../user/presentation/user_labeled_avatar.dart';
 import '../domain/garden.dart';
 import '../domain/garden_collection.dart';

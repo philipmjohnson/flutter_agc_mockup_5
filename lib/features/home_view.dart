@@ -9,7 +9,7 @@ import 'garden/domain/garden.dart';
 import 'garden/domain/garden_collection.dart';
 import 'garden/presentation/gardens_body_view.dart';
 import 'help/presentation/help_button.dart';
-import 'multi_async_values_provider.dart';
+import 'all_data_provider.dart';
 import 'news/domain/news.dart';
 import 'news/domain/news_collection.dart';
 import 'news/presentation/news_body_view.dart';

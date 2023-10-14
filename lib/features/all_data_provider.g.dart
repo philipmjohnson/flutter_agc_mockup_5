@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'multi_async_values_provider.dart';
+part of 'all_data_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$allDataHash() => r'965b16b524df03b5cec4c9d403570be54b6fc6aa';
+String _$allDataHash() => r'56193d362a32668c3e982874e0dfe6bfe6d01d5b';
 
 /// See also [allData].
 @ProviderFor(allData)

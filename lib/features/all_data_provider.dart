@@ -9,7 +9,7 @@ import 'news/domain/news.dart';
 import 'user/data/user_providers.dart';
 import 'user/domain/user.dart';
 
-part 'multi_async_values_provider.g.dart';
+part 'all_data_provider.g.dart';
 
 // Based on: https://stackoverflow.com/questions/69929734/combining-futureproviders-using-a-futureprovider-riverpod
 

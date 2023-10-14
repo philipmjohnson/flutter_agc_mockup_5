@@ -7,7 +7,7 @@ import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
 import '../../garden/domain/garden.dart';
 import '../../garden/domain/garden_collection.dart';
-import '../../multi_async_values_provider.dart';
+import '../../all_data_provider.dart';
 import '../domain/user.dart';
 import 'user_avatar.dart';
 

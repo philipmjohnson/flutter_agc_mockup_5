@@ -5,7 +5,7 @@ import '../../../agc_error.dart';
 import '../../../agc_loading.dart';
 import '../../garden/domain/garden.dart';
 import '../../garden/domain/garden_collection.dart';
-import '../../multi_async_values_provider.dart';
+import '../../all_data_provider.dart';
 import '../domain/chapter.dart';
 import '../domain/chapter_collection.dart';
 

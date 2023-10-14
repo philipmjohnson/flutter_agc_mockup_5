@@ -9,7 +9,7 @@ import '../../drawer_view.dart';
 import '../../garden/domain/garden.dart';
 import '../../garden/domain/garden_collection.dart';
 import '../../help/presentation/help_button.dart';
-import '../../multi_async_values_provider.dart';
+import '../../all_data_provider.dart';
 import '../domain/user.dart';
 import '../domain/user_collection.dart';
 import 'user_card_view.dart';

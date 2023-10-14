@@ -8,7 +8,7 @@ import '../../../agc_loading.dart';
 import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
 import '../../help/presentation/help_button.dart';
-import '../../multi_async_values_provider.dart';
+import '../../all_data_provider.dart';
 import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
 import '../data/garden_database.dart';
