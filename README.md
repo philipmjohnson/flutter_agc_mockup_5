@@ -5,7 +5,10 @@ This repository contains a mockup of the Agile Garden Club application.
 The main changes in this version include:
 * Firebase Firestore as the backend storage.
 * Firebase authentication for user registration and signin.
+* The assets/initialData directory contains sample data. It's checked against data model classes on startup to ensure data model and sample data are in sync, structurally speaking.
 * Freezed to create data model classes with serialization and deserialization.
+* FlexColorScheme for theme
+* Flutter Native Splash for a custom splash screen
 * Riverpod 2 annotations to declare providers. 
 * AsyncValue for asynchronous processing. 
 * GlobalSnackBar for notification.
