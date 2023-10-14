@@ -1,14 +1,18 @@
 # Flutter mockup of the Agile Garden Club app (Phase 5)
 
-
-This repository contains a mockup of the [Agile Garden Club](https://agilegardenclub.com) application.
+This repository contains a mockup of the Agile Garden Club application.
 
 The main changes in this version include:
+* Firebase Firestore as the backend storage.
+* Firebase authentication for user registration and signin.
+* Freezed to create data model classes with serialization and deserialization.
+* Riverpod 2 annotations to declare providers. 
+* AsyncValue for asynchronous processing. 
+* GlobalSnackBar for notification.
 
-* Use of Firebase Firestore as the backend storage.
-* Use of Firebase authentication for user registration and signin.
-* Use of [MultiAsyncValuesWidget] for retrieving multiple collections.
-* Use of [GlobalSnackBar] for notification.
+Helpful reference articles for Riverpod include:
+* <https://codewithandrea.com/articles/flutter-riverpod-generator/>
+* <https://codewithandrea.com/articles/data-mutations-riverpod/>
 
 
 ## Screen shots
