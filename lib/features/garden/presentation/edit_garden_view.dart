@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_agc_mockup/features/garden/presentation/edit_garden_controller.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../agc_error.dart';
 import '../../../agc_loading.dart';
+import '../../all_data_provider.dart';
 import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
+import '../../global_snackbar.dart';
 import '../../help/presentation/help_button.dart';
-import '../../all_data_provider.dart';
 import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
-import '../data/garden_database.dart';
-import '../data/garden_provider.dart';
 import '../domain/garden.dart';
 import '../domain/garden_collection.dart';
 import 'form-fields/chapter_dropdown_field.dart';
@@ -103,9 +103,14 @@ class EditGardenView extends ConsumerWidget {
           ownerID: currentUserID,
           viewerIDs: viewerIDs,
           editorIDs: editorIDs);
-      GardenDatabase gardenDatabase = ref.watch(gardenDatabaseProvider);
-      gardenDatabase.setGarden(garden);
-      Navigator.pushReplacementNamed(context, GardensView.routeName);
+      // GardenDatabase gardenDatabase = ref.watch(gardenDatabaseProvider);
+      // gardenDatabase.setGarden(garden);
+      ref.read(editGardenControllerProvider.notifier).updateGarden(
+          garden: garden,
+          onSuccess: () {
+            Navigator.pushReplacementNamed(context, GardensView.routeName);
+            GlobalSnackBar.show('Garden update succeeded.');
+          });
     }
 
     void onReset() {

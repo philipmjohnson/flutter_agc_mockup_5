@@ -13,7 +13,7 @@ The main changes in this version include:
 * AsyncValue for asynchronous processing. 
 * GlobalSnackBar for notification.
 
-Helpful reference articles for Riverpod include:
+To make this system easier to understand, it follows the recommendations in the following Code With Andrea articles:
 * <https://codewithandrea.com/articles/flutter-riverpod-generator/>
 * <https://codewithandrea.com/articles/data-mutations-riverpod/>
 
@@ -91,8 +91,10 @@ Click on any screen shot to see it full-size.
 
 First, clone or fork this repo and download the source code to your local computer.
 
-Second, set up a Firestore database.  You can follow the [Firestore Setup Cheat Sheet](https://courses.ics.hawaii.edu/mobile-application-development/morea/data/reading-firestore-setup-cheat-sheet.html).
+Invoke `flutter run` to run the system. You can ask Philip for credentials to login as a test user. 
 
-Third, you will want to initialize your Firestore database with example data. There is example data in the assets/initialData directory. The most convenient way we know to upload JSON files to Firestore is through Firefoo.  For further information, see these [instructions for uploading data to Firestore with Firefoo](https://courses.ics.hawaii.edu/mobile-application-development/morea/data/reading-firefoo.html).
+The system is connected to a Firestore database, which was initialized with example data from the assets/initialData directory. The most convenient way we know to upload JSON files to Firestore is through Firefoo.  For further information, see these [instructions for uploading data to Firestore with Firefoo](https://courses.ics.hawaii.edu/mobile-application-development/morea/data/reading-firefoo.html).
 
-Important note: when initializing the database with sample data, you must tell Firestore to use the "id" field in the sample data as the documentID.  The system code depends upon that equivalency.
+Important note: when initializing the database with sample data, you must tell Firestore to use the "id" field in the sample data as the documentID.  This system is designed to depend upon that equivalency. 
+
+If you want to try setting up this system to use a different Firestore database, you can follow the [Firestore Setup Cheat Sheet](https://courses.ics.hawaii.edu/mobile-application-development/morea/data/reading-firestore-setup-cheat-sheet.html).

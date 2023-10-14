@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../repositories/firestore/firestore_path.dart';
 import '../../../repositories/firestore/firestore_service.dart';
-import '../../global_snackbar.dart';
 import '../domain/garden.dart';
 
 /// Provides access to the Firestore database storing [Garden] documents.
@@ -29,9 +28,9 @@ class GardenDatabase {
       path: FirestorePath.garden(gardenId),
       builder: (data, documentId) => Garden.fromJson(data!));
 
-  Future<void> setGarden(Garden garden) => _service
-      .setData(path: FirestorePath.garden(garden.id), data: garden.toJson())
-      .then((val) => GlobalSnackBar.show('Garden update succeeded.'))
-      .catchError(
-          (e) => GlobalSnackBar.show('Garden update failed\n${e.toString()}.'));
+  Future<void> setGarden(Garden garden) => _service.setData(
+      path: FirestorePath.garden(garden.id), data: garden.toJson());
+
+  Future<void> deleteGarden(Garden garden) =>
+      _service.deleteData(path: FirestorePath.garden(garden.id));
 }

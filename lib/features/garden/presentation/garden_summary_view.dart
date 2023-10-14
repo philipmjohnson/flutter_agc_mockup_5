@@ -3,15 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../agc_error.dart';
 import '../../../agc_loading.dart';
+import '../../all_data_provider.dart';
 import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
-import '../../all_data_provider.dart';
+import '../../global_snackbar.dart';
 import '../domain/garden.dart';
 import '../domain/garden_collection.dart';
+import 'edit_garden_controller.dart';
 import 'edit_garden_view.dart';
 import 'garden_summary_users_view.dart';
+import 'gardens_view.dart';
 
-enum GardenAction { edit, leave }
+enum GardenAction { edit, delete }
 
 /// Builds a Card summarizing a [Garden].
 class GardenSummaryView extends ConsumerWidget {
@@ -25,6 +28,7 @@ class GardenSummaryView extends ConsumerWidget {
     return asyncAllData.when(
         data: (allData) => _build(
             context: context,
+            ref: ref,
             currentUserID: allData.currentUserID,
             chapters: allData.chapters,
             gardens: allData.gardens),
@@ -36,7 +40,8 @@ class GardenSummaryView extends ConsumerWidget {
       {required BuildContext context,
       required String currentUserID,
       required List<Garden> gardens,
-      required List<Chapter> chapters}) {
+      required List<Chapter> chapters,
+      required WidgetRef ref}) {
     GardenCollection gardenCollection = GardenCollection(gardens);
     ChapterCollection chapterCollection = ChapterCollection(chapters);
     String title = garden.name;
@@ -63,6 +68,14 @@ class GardenSummaryView extends ConsumerWidget {
                   Navigator.restorablePushNamed(
                       context, EditGardenView.routeName,
                       arguments: garden.id);
+                } else if (action == GardenAction.delete) {
+                  ref.read(editGardenControllerProvider.notifier).deleteGarden(
+                      garden: garden,
+                      onSuccess: () {
+                        Navigator.pushReplacementNamed(
+                            context, GardensView.routeName);
+                        GlobalSnackBar.show('Garden delete succeeded.');
+                      });
                 }
               },
               itemBuilder: (BuildContext context) =>
@@ -72,8 +85,8 @@ class GardenSummaryView extends ConsumerWidget {
                   child: Text('Edit'),
                 ),
                 const PopupMenuItem<GardenAction>(
-                  value: GardenAction.leave,
-                  child: Text('Leave'),
+                  value: GardenAction.delete,
+                  child: Text('Delete'),
                 ),
               ],
             ),
