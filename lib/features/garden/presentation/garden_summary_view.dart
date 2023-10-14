@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../chapter/data/chapter_provider.dart';
+import '../../../agc_error.dart';
+import '../../../agc_loading.dart';
 import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
-import '../../multi_async_values_widget.dart';
-import '../../news/domain/news.dart';
-import '../../user/data/user_providers.dart';
-import '../../user/domain/user.dart';
-import '../data/garden_provider.dart';
+import '../../multi_async_values_provider.dart';
 import '../domain/garden.dart';
 import '../domain/garden_collection.dart';
 import 'edit_garden_view.dart';
@@ -24,26 +21,24 @@ class GardenSummaryView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String currentUserID = ref.watch(currentUserIDProvider);
-    final AsyncValue<List<Chapter>> asyncChapters = ref.watch(chaptersProvider);
-    final AsyncValue<List<Garden>> asyncGardens = ref.watch(gardensProvider);
-    return MultiAsyncValuesWidget(
-        context: context,
-        currentUserID: currentUserID,
-        asyncChapters: asyncChapters,
-        asyncGardens: asyncGardens,
-        data: _build);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) => _build(
+            context: context,
+            currentUserID: allData.currentUserID,
+            chapters: allData.chapters,
+            gardens: allData.gardens),
+        loading: () => const AGCLoading(),
+        error: (error, st) => AGCError(error.toString(), st.toString()));
   }
 
   Widget _build(
       {required BuildContext context,
       required String currentUserID,
-      List<Chapter>? chapters,
-      List<Garden>? gardens,
-      List<News>? news,
-      List<User>? users}) {
-    ChapterCollection chapterCollection = ChapterCollection(chapters);
+      required List<Garden> gardens,
+      required List<Chapter> chapters}) {
     GardenCollection gardenCollection = GardenCollection(gardens);
+    ChapterCollection chapterCollection = ChapterCollection(chapters);
     String title = garden.name;
     String subtitle = garden.description;
     String lastUpdate = garden.lastUpdate;

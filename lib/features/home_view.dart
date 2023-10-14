@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'chapter/domain/chapter.dart';
+import '../agc_error.dart';
+import '../agc_loading.dart';
 import 'discussion/presentation/discussions_body_view.dart';
 import 'drawer_view.dart';
-import 'garden/data/garden_provider.dart';
 import 'garden/domain/garden.dart';
 import 'garden/domain/garden_collection.dart';
 import 'garden/presentation/gardens_body_view.dart';
 import 'help/presentation/help_button.dart';
-import 'multi_async_values_widget.dart';
-import 'news/data/news_provider.dart';
+import 'multi_async_values_provider.dart';
 import 'news/domain/news.dart';
 import 'news/domain/news_collection.dart';
 import 'news/presentation/news_body_view.dart';
-import 'user/data/user_providers.dart';
-import 'user/domain/user.dart';
 
 /// Build the home page.
 class HomeView extends ConsumerStatefulWidget {
@@ -42,24 +39,22 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final AsyncValue<List<Garden>> asyncGardens = ref.watch(gardensProvider);
-    final AsyncValue<List<News>> asyncNews = ref.watch(newsProvider);
-    final String currentUserID = ref.watch(currentUserIDProvider);
-    return MultiAsyncValuesWidget(
-        context: context,
-        currentUserID: currentUserID,
-        asyncGardens: asyncGardens,
-        asyncNews: asyncNews,
-        data: _build);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) => _build(
+            context: context,
+            currentUserID: allData.currentUserID,
+            news: allData.news,
+            gardens: allData.gardens),
+        loading: () => const AGCLoading(),
+        error: (error, st) => AGCError(error.toString(), st.toString()));
   }
 
   Widget _build(
       {required BuildContext context,
       required String currentUserID,
-      List<Chapter>? chapters,
-      List<Garden>? gardens,
-      List<News>? news,
-      List<User>? users}) {
+      required List<News> news,
+      required List<Garden> gardens}) {
     final gardenCollection = GardenCollection(gardens);
     final newsCollection = NewsCollection(news);
     String numNews =

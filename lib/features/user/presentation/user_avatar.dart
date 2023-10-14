@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../chapter/domain/chapter.dart';
-import '../../garden/domain/garden.dart';
-import '../../multi_async_values_widget.dart';
-import '../../news/domain/news.dart';
-import '../data/user_providers.dart';
+import '../../../agc_error.dart';
+import '../../../agc_loading.dart';
+import '../../multi_async_values_provider.dart';
 import '../domain/user.dart';
 import '../domain/user_collection.dart';
 
@@ -17,22 +15,14 @@ class UserAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String currentUserID = ref.watch(currentUserIDProvider);
-    final AsyncValue<List<User>> asyncUsers = ref.watch(usersProvider);
-    return MultiAsyncValuesWidget(
-        context: context,
-        currentUserID: currentUserID,
-        asyncUsers: asyncUsers,
-        data: _build);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) => _build(users: allData.users),
+        loading: () => const AGCLoading(),
+        error: (error, st) => AGCError(error.toString(), st.toString()));
   }
 
-  Widget _build(
-      {required BuildContext context,
-      required String currentUserID,
-      List<Chapter>? chapters,
-      List<Garden>? gardens,
-      List<News>? news,
-      List<User>? users}) {
+  Widget _build({required List<User> users}) {
     UserCollection userCollection = UserCollection(users);
     User user = userCollection.getUser(userID);
     return (user.imagePath != null)

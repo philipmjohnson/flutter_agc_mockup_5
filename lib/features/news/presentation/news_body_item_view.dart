@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../chapter/data/chapter_provider.dart';
+import '../../../agc_error.dart';
+import '../../../agc_loading.dart';
 import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
-import '../../garden/data/garden_provider.dart';
 import '../../garden/domain/garden.dart';
 import '../../garden/domain/garden_collection.dart';
-import '../../multi_async_values_widget.dart';
-import '../../user/data/user_providers.dart';
-import '../../user/domain/user.dart';
-import '../data/news_provider.dart';
+import '../../multi_async_values_provider.dart';
 import '../domain/news.dart';
 import '../domain/news_collection.dart';
 import 'news_body_item_actions.dart';
@@ -26,26 +23,24 @@ class NewsBodyItemView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String currentUserID = ref.watch(currentUserIDProvider);
-    final AsyncValue<List<Chapter>> asyncChapters = ref.watch(chaptersProvider);
-    final AsyncValue<List<Garden>> asyncGardens = ref.watch(gardensProvider);
-    final AsyncValue<List<News>> asyncNews = ref.watch(newsProvider);
-    return MultiAsyncValuesWidget(
-        context: context,
-        currentUserID: currentUserID,
-        asyncChapters: asyncChapters,
-        asyncGardens: asyncGardens,
-        asyncNews: asyncNews,
-        data: _build);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) => _build(
+            context: context,
+            currentUserID: allData.currentUserID,
+            gardens: allData.gardens,
+            news: allData.news,
+            chapters: allData.chapters),
+        loading: () => const AGCLoading(),
+        error: (error, st) => AGCError(error.toString(), st.toString()));
   }
 
   Widget _build(
       {required BuildContext context,
       required String currentUserID,
-      List<Chapter>? chapters,
-      List<Garden>? gardens,
-      List<News>? news,
-      List<User>? users}) {
+      required List<Chapter> chapters,
+      required List<News> news,
+      required List<Garden> gardens}) {
     ChapterCollection chapterCollection = ChapterCollection(chapters);
     GardenCollection gardenCollection = GardenCollection(gardens);
     NewsCollection newsCollection = NewsCollection(news);

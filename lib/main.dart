@@ -9,13 +9,11 @@ import 'features/authentication/presentation/signin_view.dart';
 import 'features/authentication/presentation/verify_email_view.dart';
 import 'features/chapter/domain/chapter.dart';
 import 'features/chapter/presentation/chapters_view.dart';
-import 'features/chapter/presentation/chapters_view2.dart';
 import 'features/discussion/presentation/discussions_view.dart';
 import 'features/garden/domain/garden.dart';
 import 'features/garden/presentation/add_garden_view.dart';
 import 'features/garden/presentation/edit_garden_view.dart';
 import 'features/garden/presentation/gardens_view.dart';
-import 'features/garden/presentation/gardens_view2.dart';
 import 'features/global_snackbar.dart';
 import 'features/help/presentation/help_view.dart';
 import 'features/help/presentation/help_view_local.dart';
@@ -80,13 +78,13 @@ class MyApp extends ConsumerWidget {
               case HomeView.routeName:
                 return const HomeView();
               case GardensView.routeName:
-                return const GardensView2();
+                return const GardensView();
               case AddGardenView.routeName:
                 return AddGardenView();
               case EditGardenView.routeName:
                 return EditGardenView();
               case ChaptersView.routeName:
-                return const ChaptersView2();
+                return const ChaptersView();
               case OutcomesView.routeName:
                 return const OutcomesView();
               case SeedsView.routeName:

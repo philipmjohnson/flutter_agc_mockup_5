@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../chapter/domain/chapter.dart';
-import '../../multi_async_values_widget.dart';
-import '../../news/domain/news.dart';
-import '../../user/data/user_providers.dart';
-import '../../user/domain/user.dart';
+import '../../../agc_error.dart';
+import '../../../agc_loading.dart';
+import '../../multi_async_values_provider.dart';
 import '../../user/presentation/user_labeled_avatar.dart';
-import '../data/garden_provider.dart';
 import '../domain/garden.dart';
 import '../domain/garden_collection.dart';
 
@@ -20,22 +17,20 @@ class GardenSummaryUsersView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<Garden>> asyncGardens = ref.watch(gardensProvider);
-    final String currentUserID = ref.watch(currentUserIDProvider);
-    return MultiAsyncValuesWidget(
-        context: context,
-        currentUserID: currentUserID,
-        asyncGardens: asyncGardens,
-        data: _build);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) => _build(
+            context: context,
+            currentUserID: allData.currentUserID,
+            gardens: allData.gardens),
+        loading: () => const AGCLoading(),
+        error: (error, st) => AGCError(error.toString(), st.toString()));
   }
 
   Widget _build(
       {required BuildContext context,
       required String currentUserID,
-      List<Chapter>? chapters,
-      List<Garden>? gardens,
-      List<News>? news,
-      List<User>? users}) {
+      required List<Garden> gardens}) {
     double padding = 10;
     Garden garden = GardenCollection(gardens).getGarden(gardenID);
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [

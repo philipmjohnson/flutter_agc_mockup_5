@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../chapter/domain/chapter.dart';
-import '../../garden/domain/garden.dart';
-import '../../multi_async_values_widget.dart';
-import '../../user/data/user_providers.dart';
-import '../../user/domain/user.dart';
-import '../data/news_provider.dart';
+import '../../../agc_error.dart';
+import '../../../agc_loading.dart';
+import '../../multi_async_values_provider.dart';
 import '../domain/news.dart';
 import '../domain/news_collection.dart';
 import 'news_body_item_view.dart';
@@ -21,22 +18,20 @@ class NewsBodyView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String currentUserID = ref.watch(currentUserIDProvider);
-    final AsyncValue<List<News>> asyncNews = ref.watch(newsProvider);
-    return MultiAsyncValuesWidget(
-        context: context,
-        currentUserID: currentUserID,
-        asyncNews: asyncNews,
-        data: _build);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) => _build(
+            context: context,
+            currentUserID: allData.currentUserID,
+            news: allData.news),
+        loading: () => const AGCLoading(),
+        error: (error, st) => AGCError(error.toString(), st.toString()));
   }
 
   Widget _build(
       {required BuildContext context,
       required String currentUserID,
-      List<Chapter>? chapters,
-      List<Garden>? gardens,
-      List<News>? news,
-      List<User>? users}) {
+      required List<News> news}) {
     NewsCollection newsCollection = NewsCollection(news);
     List<String> newsIDs = newsCollection.getAssociatedNewsIDs(currentUserID);
     return Padding(

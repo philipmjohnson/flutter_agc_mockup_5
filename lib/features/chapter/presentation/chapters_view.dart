@@ -1,49 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../agc_error.dart';
+import '../../../agc_loading.dart';
 import '../../drawer_view.dart';
-import '../../garden/data/garden_provider.dart';
 import '../../garden/domain/garden.dart';
 import '../../garden/domain/garden_collection.dart';
 import '../../help/presentation/help_button.dart';
-import '../../multi_async_values_widget.dart';
-import '../../news/domain/news.dart';
-import '../../user/data/user_providers.dart';
-import '../../user/domain/user.dart';
-import '../data/chapter_provider.dart';
+import '../../multi_async_values_provider.dart';
 import '../domain/chapter.dart';
 import '../domain/chapter_collection.dart';
 import 'chapter_card_view.dart';
-
-const pageSpecification = '''
-# Chapters Page Specification
-
-## Motivation/Goals
-
-This page should help the user understand what Chapters are, and what Chapters they are a member of, and why.
-
-Usually, the user is a member of only one Chapter.
-
-## Contents 
-
-Probably want to start with a dismissable documentation card at the top that explains the idea behind Chapters. 
-
-Then a set of cards, one per Chapter, each containing:
-
-* The Chapter name
-* The number of members in the chapter.
-* The zip code(s) associated with the chapter.
-* A representative photo of the chapter. Maybe a map image delineating the chapter boundaries?
-* Perhaps some information about the Crops being grown. 
-
-## Actions 
-
-Possible actions associated with each Chapter card:
-
-* See the gardens associated with the Chapter.
-* See the members associated with the Chapter.
-
-''';
 
 /// Builds a page containing [ChapterCardView]s.
 class ChaptersView extends ConsumerWidget {
@@ -55,24 +22,22 @@ class ChaptersView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String currentUserID = ref.watch(currentUserIDProvider);
-    final AsyncValue<List<Chapter>> asyncChapters = ref.watch(chaptersProvider);
-    final AsyncValue<List<Garden>> asyncGardens = ref.watch(gardensProvider);
-    return MultiAsyncValuesWidget(
-        context: context,
-        currentUserID: currentUserID,
-        asyncChapters: asyncChapters,
-        asyncGardens: asyncGardens,
-        data: _build);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) => _build(
+            context: context,
+            currentUserID: allData.currentUserID,
+            gardens: allData.gardens,
+            chapters: allData.chapters),
+        loading: () => const AGCLoading(),
+        error: (error, st) => AGCError(error.toString(), st.toString()));
   }
 
   Widget _build(
       {required BuildContext context,
       required String currentUserID,
-      List<Chapter>? chapters,
-      List<Garden>? gardens,
-      List<News>? news,
-      List<User>? users}) {
+      required List<Chapter> chapters,
+      required List<Garden> gardens}) {
     ChapterCollection chapterCollection = ChapterCollection(chapters);
     GardenCollection gardenCollection = GardenCollection(gardens);
     return Scaffold(

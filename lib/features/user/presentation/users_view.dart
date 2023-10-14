@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../chapter/data/chapter_provider.dart';
+import '../../../agc_error.dart';
+import '../../../agc_loading.dart';
 import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
 import '../../drawer_view.dart';
-import '../../garden/data/garden_provider.dart';
 import '../../garden/domain/garden.dart';
 import '../../garden/domain/garden_collection.dart';
 import '../../help/presentation/help_button.dart';
-import '../../multi_async_values_widget.dart';
-import '../../news/domain/news.dart';
-import '../data/user_providers.dart';
+import '../../multi_async_values_provider.dart';
 import '../domain/user.dart';
 import '../domain/user_collection.dart';
 import 'user_card_view.dart';
@@ -53,28 +51,26 @@ class UsersView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String currentUserID = ref.watch(currentUserIDProvider);
-    final AsyncValue<List<Chapter>> asyncChapters = ref.watch(chaptersProvider);
-    final AsyncValue<List<Garden>> asyncGardens = ref.watch(gardensProvider);
-    final AsyncValue<List<User>> asyncUsers = ref.watch(usersProvider);
-    return MultiAsyncValuesWidget(
-        context: context,
-        currentUserID: currentUserID,
-        asyncChapters: asyncChapters,
-        asyncGardens: asyncGardens,
-        asyncUsers: asyncUsers,
-        data: _build);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) => _build(
+            context: context,
+            currentUserID: allData.currentUserID,
+            chapters: allData.chapters,
+            users: allData.users,
+            gardens: allData.gardens),
+        loading: () => const AGCLoading(),
+        error: (error, st) => AGCError(error.toString(), st.toString()));
   }
 
   Widget _build(
       {required BuildContext context,
       required String currentUserID,
-      List<Chapter>? chapters,
-      List<Garden>? gardens,
-      List<News>? news,
-      List<User>? users}) {
-    ChapterCollection chapterCollection = ChapterCollection(chapters);
+      required List<Garden> gardens,
+      required List<User> users,
+      required List<Chapter> chapters}) {
     GardenCollection gardenCollection = GardenCollection(gardens);
+    ChapterCollection chapterCollection = ChapterCollection(chapters);
     UserCollection userCollection = UserCollection(users);
     return Scaffold(
       drawer: const DrawerView(),
