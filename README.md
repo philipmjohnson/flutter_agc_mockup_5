@@ -3,17 +3,18 @@
 This repository contains a mockup of the Agile Garden Club application.
 
 The main changes in this version include:
-* Firebase Firestore as the backend storage.
-* Firebase authentication for user registration and signin.
+* Firebase Firestore for backend storage.
+* Firebase Authentication for user registration and signin.
 * The assets/initialData directory contains sample data. It's checked against data model classes on startup to ensure data model and sample data are in sync, structurally speaking.
-* Freezed to create data model classes with serialization and deserialization.
-* FlexColorScheme for theme
+* Freezed for data model classes with serialization and deserialization.
+* FlexColorScheme for theme.
 * Flutter Native Splash for a custom splash screen
-* Riverpod 2 annotations to declare providers. 
-* AsyncValue for asynchronous processing. 
+* Riverpod 2 annotations for provider declaration.
+* Riverpod's AsyncValue to support asynchronous processing. 
 * GlobalSnackBar for notification.
+* A custom widget called "AllData" to support retrieval of multiple collections
 
-To make this system easier to understand, it follows the recommendations in the following Code With Andrea articles:
+To make this system easier to understand, you might want to read the following Code With Andrea articles. This system follows those recommendations:
 * <https://codewithandrea.com/articles/flutter-riverpod-generator/>
 * <https://codewithandrea.com/articles/data-mutations-riverpod/>
 
@@ -54,12 +55,14 @@ Click on any screen shot to see it full-size.
   <img src="https://github.com/philipmjohnson/flutter_agc_mockup_5/raw/main/README-screenshots/chapters.png" width="30%">
 </p>
 
-### Add Garden and Edit Garden
+### Add, Edit, and Delete Garden
 
 <p style="text-align: center">
   <img src="https://github.com/philipmjohnson/flutter_agc_mockup_5/raw/main/README-screenshots/add-garden.png" width="30%">
 &nbsp; &nbsp; 
   <img src="https://github.com/philipmjohnson/flutter_agc_mockup_5/raw/main/README-screenshots/edit-garden.png" width="30%">
+
+  <img src="https://github.com/philipmjohnson/flutter_agc_mockup_5/raw/main/README-screenshots/delete-garden.png" width="30%">
 </p>
 
 ### Outcomes, Seeds, Members pages
