@@ -103,8 +103,6 @@ class EditGardenView extends ConsumerWidget {
           ownerID: currentUserID,
           viewerIDs: viewerIDs,
           editorIDs: editorIDs);
-      // GardenDatabase gardenDatabase = ref.watch(gardenDatabaseProvider);
-      // gardenDatabase.setGarden(garden);
       ref.read(editGardenControllerProvider.notifier).updateGarden(
           garden: garden,
           onSuccess: () {
