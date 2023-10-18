@@ -18,41 +18,38 @@ class EditGardenController extends _$EditGardenController {
   @override
   FutureOr<void> build() {
     ref.onDispose(() => mounted = false);
+    state = const AsyncData(null);
   }
 
-  Future<void> updateGarden(
-      {required Garden garden,
-      required VoidCallback onSuccess,
-      required VoidCallback onError}) async {
+  Future<void> updateGarden({
+    required Garden garden,
+    required VoidCallback onSuccess,
+  }) async {
     state = const AsyncLoading();
     GardenDatabase gardenDatabase = ref.watch(gardenDatabaseProvider);
     final newState =
-        await AsyncValue.guard(() => gardenDatabase.setGardenDelayed(garden));
+        await AsyncValue.guard(() => gardenDatabase.setGarden(garden));
     if (mounted) {
       state = newState;
-      if (state.hasError) {
-        onError();
-      }
-      if (state.hasValue) {
-        onSuccess();
-      }
-    } else {
+    }
+    // Weird. Can't use "if (state.hasValue)" below.
+    if (!state.hasError) {
       onSuccess();
     }
   }
 
-  Future<void> deleteGarden(
-      {required Garden garden, required VoidCallback onSuccess}) async {
+  Future<void> deleteGarden({
+    required Garden garden,
+    required VoidCallback onSuccess,
+  }) async {
     state = const AsyncLoading();
     GardenDatabase gardenDatabase = ref.watch(gardenDatabaseProvider);
     final newState =
         await AsyncValue.guard(() => gardenDatabase.deleteGarden(garden));
     if (mounted) {
       state = newState;
-      if (state.hasError == false) {
-        onSuccess();
-      }
-    } else {
+    }
+    if (!state.hasError) {
       onSuccess();
     }
   }

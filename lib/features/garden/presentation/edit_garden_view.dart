@@ -104,27 +104,19 @@ class EditGardenView extends ConsumerWidget {
           viewerIDs: viewerIDs,
           editorIDs: editorIDs);
       ref.read(editGardenControllerProvider.notifier).updateGarden(
-          garden: garden,
-          onSuccess: () {
-            Navigator.pushReplacementNamed(context, GardensView.routeName);
-            GlobalSnackBar.show('Garden update succeeded.');
-          },
-          onError: () {
-            Navigator.pushReplacementNamed(context, GardensView.routeName);
-            GlobalSnackBar.show('Garden update failed.');
-          });
+            garden: garden,
+            onSuccess: () {
+              Navigator.pushReplacementNamed(context, GardensView.routeName);
+              GlobalSnackBar.show('Garden update succeeded.');
+            },
+          );
     }
 
     void onReset() {
       _formKey.currentState?.reset();
     }
 
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Edit Garden'),
-          actions: const [HelpButton(routeName: EditGardenView.routeName)],
-        ),
-        body: ListView(
+    Widget displayForm() => ListView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           children: [
             Column(
@@ -165,6 +157,22 @@ class EditGardenView extends ConsumerWidget {
               ],
             ),
           ],
-        ));
+        );
+
+    Widget displayLoading() => const Center(child: CircularProgressIndicator());
+
+    Widget displayError(e, st) => Center(child: Text(e.toString()));
+
+    AsyncValue asyncUpdate = ref.watch(editGardenControllerProvider);
+
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Edit Garden'),
+          actions: const [HelpButton(routeName: EditGardenView.routeName)],
+        ),
+        body: asyncUpdate.when(
+            loading: () => displayLoading(),
+            error: (e, st) => displayError(e, st),
+            data: (_) => displayForm()));
   }
 }

@@ -36,6 +36,9 @@ class GardenDatabase {
       () => _service.setData(
           path: FirestorePath.garden(garden.id), data: garden.toJson()));
 
+  Future<void> setGardenError(Garden garden) =>
+      Future.delayed(const Duration(milliseconds: 2000), () => throw Error());
+
   Future<void> deleteGarden(Garden garden) =>
       _service.deleteData(path: FirestorePath.garden(garden.id));
 }
