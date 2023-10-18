@@ -166,8 +166,8 @@ class EditGardenView extends ConsumerWidget {
           actions: const [HelpButton(routeName: EditGardenView.routeName)],
         ),
         body: asyncUpdate.when(
+            data: (_) => displayForm(),
             loading: () => const AGCLoading(),
-            error: (e, st) => AGCError(e.toString(), st.toString()),
-            data: (_) => displayForm()));
+            error: (e, st) => AGCError(e.toString(), st.toString())));
   }
 }
