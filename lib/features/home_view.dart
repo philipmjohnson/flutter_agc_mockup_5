@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../agc_error.dart';
-import '../agc_loading.dart';
+import 'agc_error.dart';
+import 'agc_loading.dart';
+import 'all_data_provider.dart';
 import 'discussion/presentation/discussions_body_view.dart';
 import 'drawer_view.dart';
 import 'garden/domain/garden.dart';
 import 'garden/domain/garden_collection.dart';
 import 'garden/presentation/gardens_body_view.dart';
 import 'help/presentation/help_button.dart';
-import 'all_data_provider.dart';
 import 'news/domain/news.dart';
 import 'news/domain/news_collection.dart';
 import 'news/presentation/news_body_view.dart';

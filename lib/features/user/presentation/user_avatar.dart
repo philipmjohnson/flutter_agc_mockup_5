@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../agc_error.dart';
-import '../../../agc_loading.dart';
+import '../../agc_error.dart';
+import '../../agc_loading.dart';
 import '../../all_data_provider.dart';
 import '../domain/user.dart';
 import '../domain/user_collection.dart';

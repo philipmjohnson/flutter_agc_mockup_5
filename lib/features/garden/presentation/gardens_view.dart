@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_agc_mockup/agc_error.dart';
-import 'package:flutter_agc_mockup/agc_loading.dart';
+import 'package:flutter_agc_mockup/features/agc_error.dart';
+import 'package:flutter_agc_mockup/features/agc_loading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../all_data_provider.dart';
 import '../../drawer_view.dart';
 import '../../help/presentation/help_button.dart';
-import '../../all_data_provider.dart';
 import '../domain/garden.dart';
 import '../domain/garden_collection.dart';
 import 'add_garden_view.dart';

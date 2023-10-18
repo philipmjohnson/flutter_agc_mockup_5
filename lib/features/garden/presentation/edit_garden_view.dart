@@ -4,8 +4,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../../agc_error.dart';
-import '../../../agc_loading.dart';
+import '../../agc_error.dart';
+import '../../agc_loading.dart';
 import '../../all_data_provider.dart';
 import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
@@ -51,8 +51,7 @@ class EditGardenView extends ConsumerWidget {
             chapters: allData.chapters,
             ref: ref),
         loading: () => const AGCLoading(),
-        error: (error, stacktrace) =>
-            AGCError(error.toString(), stacktrace.toString()));
+        error: (e, st) => AGCError(e.toString(), st.toString()));
   }
 
   Widget _build(
@@ -159,10 +158,6 @@ class EditGardenView extends ConsumerWidget {
           ],
         );
 
-    Widget displayLoading() => const Center(child: CircularProgressIndicator());
-
-    Widget displayError(e, st) => Center(child: Text(e.toString()));
-
     AsyncValue asyncUpdate = ref.watch(editGardenControllerProvider);
 
     return Scaffold(
@@ -171,8 +166,8 @@ class EditGardenView extends ConsumerWidget {
           actions: const [HelpButton(routeName: EditGardenView.routeName)],
         ),
         body: asyncUpdate.when(
-            loading: () => displayLoading(),
-            error: (e, st) => displayError(e, st),
+            loading: () => const AGCLoading(),
+            error: (e, st) => AGCError(e.toString(), st.toString()),
             data: (_) => displayForm()));
   }
 }

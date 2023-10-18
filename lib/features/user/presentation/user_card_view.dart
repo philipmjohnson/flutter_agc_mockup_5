@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../agc_error.dart';
-import '../../../agc_loading.dart';
+import '../../agc_error.dart';
+import '../../agc_loading.dart';
+import '../../all_data_provider.dart';
 import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
 import '../../garden/domain/garden.dart';
 import '../../garden/domain/garden_collection.dart';
-import '../../all_data_provider.dart';
 import '../domain/user.dart';
 import 'user_avatar.dart';
 
