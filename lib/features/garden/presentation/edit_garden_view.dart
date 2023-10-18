@@ -108,6 +108,10 @@ class EditGardenView extends ConsumerWidget {
           onSuccess: () {
             Navigator.pushReplacementNamed(context, GardensView.routeName);
             GlobalSnackBar.show('Garden update succeeded.');
+          },
+          onError: () {
+            Navigator.pushReplacementNamed(context, GardensView.routeName);
+            GlobalSnackBar.show('Garden update failed.');
           });
     }
 

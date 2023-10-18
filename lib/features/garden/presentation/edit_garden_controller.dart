@@ -21,14 +21,19 @@ class EditGardenController extends _$EditGardenController {
   }
 
   Future<void> updateGarden(
-      {required Garden garden, required VoidCallback onSuccess}) async {
+      {required Garden garden,
+      required VoidCallback onSuccess,
+      required VoidCallback onError}) async {
     state = const AsyncLoading();
     GardenDatabase gardenDatabase = ref.watch(gardenDatabaseProvider);
     final newState =
         await AsyncValue.guard(() => gardenDatabase.setGarden(garden));
     if (mounted) {
       state = newState;
-      if (!state.hasError) {
+      if (state.hasError) {
+        onError();
+      }
+      if (state.hasValue) {
         onSuccess();
       }
     } else {
