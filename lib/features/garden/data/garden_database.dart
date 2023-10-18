@@ -31,6 +31,11 @@ class GardenDatabase {
   Future<void> setGarden(Garden garden) => _service.setData(
       path: FirestorePath.garden(garden.id), data: garden.toJson());
 
+  Future<void> setGardenDelayed(Garden garden) => Future.delayed(
+      const Duration(milliseconds: 2000),
+      () => _service.setData(
+          path: FirestorePath.garden(garden.id), data: garden.toJson()));
+
   Future<void> deleteGarden(Garden garden) =>
       _service.deleteData(path: FirestorePath.garden(garden.id));
 }

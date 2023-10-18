@@ -27,7 +27,7 @@ class EditGardenController extends _$EditGardenController {
     state = const AsyncLoading();
     GardenDatabase gardenDatabase = ref.watch(gardenDatabaseProvider);
     final newState =
-        await AsyncValue.guard(() => gardenDatabase.setGarden(garden));
+        await AsyncValue.guard(() => gardenDatabase.setGardenDelayed(garden));
     if (mounted) {
       state = newState;
       if (state.hasError) {
