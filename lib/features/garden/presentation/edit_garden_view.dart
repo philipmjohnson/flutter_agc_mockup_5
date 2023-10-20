@@ -106,7 +106,7 @@ class EditGardenView extends ConsumerWidget {
             garden: garden,
             onSuccess: () {
               Navigator.pushReplacementNamed(context, GardensView.routeName);
-              GlobalSnackBar.show('Garden update succeeded.');
+              GlobalSnackBar.show('Garden "$name" updated.');
             },
           );
     }
@@ -115,7 +115,7 @@ class EditGardenView extends ConsumerWidget {
       _formKey.currentState?.reset();
     }
 
-    Widget displayForm() => ListView(
+    Widget editGardenForm() => ListView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           children: [
             Column(
@@ -166,7 +166,7 @@ class EditGardenView extends ConsumerWidget {
           actions: const [HelpButton(routeName: EditGardenView.routeName)],
         ),
         body: asyncUpdate.when(
-            data: (_) => displayForm(),
+            data: (_) => editGardenForm(),
             loading: () => const AGCLoading(),
             error: (e, st) => AGCError(e.toString(), st.toString())));
   }

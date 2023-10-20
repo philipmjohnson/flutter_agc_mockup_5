@@ -8,13 +8,13 @@ import '../../agc_loading.dart';
 import '../../all_data_provider.dart';
 import '../../chapter/domain/chapter.dart';
 import '../../chapter/domain/chapter_collection.dart';
+import '../../global_snackbar.dart';
 import '../../help/presentation/help_button.dart';
 import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
-import '../data/garden_database.dart';
-import '../data/garden_provider.dart';
 import '../domain/garden.dart';
 import '../domain/garden_collection.dart';
+import 'edit_garden_controller.dart';
 import 'form-fields/chapter_dropdown_field.dart';
 import 'form-fields/description_field.dart';
 import 'form-fields/editors_field.dart';
@@ -94,22 +94,20 @@ class AddGardenView extends ConsumerWidget {
           ownerID: currentUserID,
           viewerIDs: viewerIDs,
           editorIDs: editorIDs);
-      GardenDatabase gardenDatabase = ref.watch(gardenDatabaseProvider);
-      gardenDatabase.setGarden(garden);
-      // Return to the list gardens page
-      Navigator.pushReplacementNamed(context, GardensView.routeName);
+      ref.read(editGardenControllerProvider.notifier).updateGarden(
+            garden: garden,
+            onSuccess: () {
+              Navigator.pushReplacementNamed(context, GardensView.routeName);
+              GlobalSnackBar.show('Garden "$name" added.');
+            },
+          );
     }
 
     void onReset() {
       _formKey.currentState?.reset();
     }
 
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Add Garden'),
-          actions: const [HelpButton(routeName: AddGardenView.routeName)],
-        ),
-        body: ListView(
+    Widget addGardenForm() => ListView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           children: [
             Column(
@@ -142,6 +140,18 @@ class AddGardenView extends ConsumerWidget {
               ],
             ),
           ],
-        ));
+        );
+
+    AsyncValue asyncUpdate = ref.watch(editGardenControllerProvider);
+
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Add Garden'),
+          actions: const [HelpButton(routeName: AddGardenView.routeName)],
+        ),
+        body: asyncUpdate.when(
+            data: (_) => addGardenForm(),
+            loading: () => const AGCLoading(),
+            error: (e, st) => AGCError(e.toString(), st.toString())));
   }
 }

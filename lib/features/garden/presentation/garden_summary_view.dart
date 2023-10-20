@@ -61,7 +61,7 @@ class GardenSummaryView extends ConsumerWidget {
     ref.read(editGardenControllerProvider.notifier).deleteGarden(
         garden: garden,
         onSuccess: () {
-          GlobalSnackBar.show('Garden delete succeeded.');
+          GlobalSnackBar.show('Garden "${garden.name}" deleted.');
         });
   }
 
