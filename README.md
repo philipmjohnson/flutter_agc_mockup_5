@@ -2,17 +2,68 @@
 
 This repository contains a mockup of the Agile Garden Club application.
 
-The main changes in this version include:
-* Firebase Firestore for backend storage.
-* Firebase Authentication for user registration and signin.
-* The assets/initialData directory contains sample data. It's checked against data model classes on startup to ensure data model and sample data are in sync, structurally speaking.
-* Freezed for data model classes with serialization and deserialization.
-* FlexColorScheme for theme.
-* Flutter Native Splash for a custom splash screen
-* Riverpod 2 annotations for provider declaration.
-* Riverpod's AsyncValue to support asynchronous processing. 
-* GlobalSnackBar for notification.
-* A custom widget called "AllData" to support retrieval of multiple collections
+The main features added to this version include:
+
+### 1. A working backend database
+
+This version uses Firebase Firestore for backend storage and Firebase Authentication for user registration and signin.
+
+See the code in lib/repositories/firestore
+
+### 2. Sample data to check deserialization of domain model classes
+
+To help ensure that the domain model classes are defined correctly, sample JSON data for all domain model classes are stored in assets/initialData. 
+
+Then, when the system starts up, the verifyInitialData() method is called in main.dart to simply check that this JSON data can be read in without an error. 
+
+### 3. Domain model classes use Freezed to support ADT and serial/deserialization
+
+See Chapter, Garden, News, and User features for examples. 
+
+### 4. Flex Color Scheme for a custom color scheme
+
+This system uses a built-in theme from Flex Color Scheme to provide a custom color scheme. See main.dart for details. 
+
+### 5. Flutter Native Splash for a custom splash screen
+
+Tired of seeing a blank screen while your app initializes? This system uses Flutter Native Splash to show the AGC logo while the system initializes.
+
+See the Flutter Native Splash documentation for instructions. It is mostly specified in pubspec.yml.
+
+### 6. Riverpod 2 annotations to simplify provider declarations.
+
+Once you get the hang of them, Riverpod annotations are totally the best way to define providers. 
+
+They are defined in the data/ directories. See chapter_provider.dart, garden_provider.dart, help_provider.dart, and news_provider.dart.
+
+### 7. AllData to support retrieval of multiple collections
+
+In many situations, a screen will need data from multiple collections in order to display itself correctly. 
+
+We also want the screen to automatically update when another client modifies the database (the canonical example is a chat client, where you want to see new messages without refreshing the page).
+
+The AllData class (and associated provider) illustrates one way to easily provide a screen with data from multiple collections.
+
+### 8. Riverpod's AsyncValue to manage AllDataProvider return states
+
+The all_data_provider.dart file defines a provider called AllDataProvider. It returns an AsyncValue when watched. This AsyncValue makes it easy to display different things on the screen depending upon what state the AsyncValue is in (data, loading, error).
+
+See chapters_view.dart, gardens_view.dart, news_body_view.dart for examples. 
+
+### 9. Global Snack Bar for notification
+
+When you add or edit a domain entity, it is nice to have the system confirm that the update was successful.  See add_garden_view, edit_garden_view, or garden_summary_view.dart for examples of the use of the Global Snackbar.
+
+See global_snackbar.dart and main.dart for how to set it up.
+
+### 10. Controller design pattern for data mutation
+
+Andrea Bizzotti documents a nice controller-based design pattern for data mutation (i.e. creating, updating, and deleting domain entities). See below for a link.
+
+You can see an implementation of this design pattern in edit_garden_controller.dart. Only the Garden domain entity supports CRUD in this example system.
+
+
+### Background reading
 
 To make this system easier to understand, you might want to read the following Code With Andrea articles. This system follows those recommendations:
 * <https://codewithandrea.com/articles/flutter-riverpod-generator/>

@@ -21,6 +21,7 @@ class EditGardenController extends _$EditGardenController {
     state = const AsyncData(null);
   }
 
+  // Invoked to add a new garden or edit an existing one.
   Future<void> updateGarden({
     required Garden garden,
     required VoidCallback onSuccess,
